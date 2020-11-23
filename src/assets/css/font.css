@@ -1,0 +1,15 @@
+/* DINAlternate */
+@font-face {
+  font-family: 'DINAlternate';
+  src: url('../font/DIN\ Alternate\ Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
+/* PingFangJ */
+@font-face {
+  font-family: 'PingFangJ';
+  src: url('../font/苹方黑体-中黑-简.ttf');
+  font-style: normal;
+}

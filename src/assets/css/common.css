@@ -1,0 +1,1018 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background: #fff;
+  color: #2c3e50;
+  font-weight: 400;
+  -webkit-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  text-size-adjust: none;
+  /* overflow-x: hidden; */
+  /* font-family: Microsoft YaHei,Arial,Verdana,Sans-serif; */
+}
+
+html,
+body {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  /* font-family: sans-serif, PingFangSC-Medium, Microsoft YaHei, Arial, Verdana; */
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-size: 0.14rem;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.bg_white {
+  background: #fff;
+}
+
+html {
+  font-size: 625%;
+}
+
+img,
+legend {
+  border: 0;
+}
+
+*,
+:after,
+:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+  word-break: break-word;
+}
+
+:focus,
+a:active,
+a:hover {
+  outline: 0;
+}
+
+dd,
+dl,
+legend,
+ol,
+td,
+th,
+ul {
+  list-style: none;
+}
+
+ul>li {
+  list-style: none;
+}
+
+a {
+  background-color: transparent;
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+b,
+optgroup,
+strong {
+  font-weight: normal;
+}
+
+dfn {
+  font-style: italic;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+figure {
+  margin: 1em 40px;
+}
+
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+textarea {
+  overflow: auto;
+}
+
+pre {
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  border-radius: 0;
+}
+
+button {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+input {
+  line-height: normal;
+  font-family: PingFangSC-Medium;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+  vertical-align: middle;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+  -webkit-appearance: none !important;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield !important;
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #d8d8d8;
+  font-size: 0.16rem;
+}
+
+fieldset {
+  border: 1px solid silver;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  outline: none;
+  border: none;
+}
+
+em,
+i {
+  font-style: normal;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  background: none;
+}
+
+input::-webkit-input-placeholder {
+  font: 400 0.14rem system-ui;
+}
+
+/* 公用样式 */
+/* 注册登陆 */
+.vrt {
+  background: #fff;
+  height: 100%;
+}
+
+.hideimg {
+  display: none;
+}
+
+.icon {
+  position: absolute;
+  display: block;
+  right: 0.1rem;
+  top: 0.21rem;
+  background-size: 100%;
+}
+
+.mint-actionsheet .mint-actionsheet-listitem {
+  color: #ffbb11;
+  font-size: 15px;
+}
+
+.mint-msgbox-confirm {
+  color: #ffbb11;
+}
+
+.bodyBack {
+  background: #f5f5f5;
+}
+
+.clearfix {
+  zoom: 1;
+}
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.text_red {
+  color: #f74e4e !important;
+}
+
+.text_green {
+  color: #36bc63 !important;
+}
+
+.bg_red {
+  background: #f74e4e !important;
+}
+
+.bg_green {
+  background: #36bc63 !important;
+}
+
+.border_red {
+  border: 1px solid #f74e4e !important;
+}
+
+.border_green {
+  border: 1px solid #36bc63 !important;
+}
+
+.bit-toast {
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 4px;
+  max-width: 4rem;
+  color: #fff;
+  font-size: 0.14rem;
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 999999;
+  visibility: visible;
+  padding: 0.12rem 0.13rem;
+  transition: opacity 0.3s linear;
+  opacity: 0;
+}
+
+.bit-toast-op {
+  opacity: 1;
+}
+
+.bit-notice {
+  width: 200px;
+  min-height: 70px;
+  position: absolute;
+  top: 60px;
+  right: 40px;
+  background: #494949;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.29);
+  border-radius: 4px;
+  padding: 10px;
+  z-index: 10001;
+}
+
+.bit-notice p {
+  font-size: 13px;
+  color: #fff;
+  word-break: break-all;
+}
+
+.tl {
+  text-align: left;
+}
+
+.tr {
+  text-align: right;
+}
+
+.tc {
+  text-align: center;
+}
+
+.mt40 {
+  margin-top: 0.39rem !important;
+}
+
+.swiper-pagination {
+  bottom: 0.1rem;
+}
+
+.banner .swiper-pagination-bullet {
+  margin-right: 0.05rem;
+}
+
+.app_main>div {
+  padding-bottom: 0.6rem;
+}
+
+.app_main>div.person_main,
+.app_main>div.noticeBox,
+.app_main>div.messageBox,
+.app_main>div.market {
+  padding-bottom: 0;
+}
+
+.noPage::after {
+  width: 100%;
+  padding: 1.5rem 0 0.5rem 0;
+  content: "暂无数据";
+  text-align: center;
+  display: block;
+  color: #666666;
+}
+
+/*向上*/
+.triangle_border_up {
+  width: 0;
+  height: 0;
+  border-width: 0 30px 30px;
+  border-style: solid;
+  border-color: transparent transparent #333;
+  /*透明 透明  灰*/
+  margin: 40px auto;
+  position: relative;
+}
+
+.triangle_border_up span {
+  display: block;
+  width: 0;
+  height: 0;
+  border-width: 0 28px 28px;
+  border-style: solid;
+  border-color: transparent transparent #fc0;
+  /*透明 透明  黄*/
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+/*向下*/
+.triangle_border_down {
+  width: 0;
+  height: 0;
+  border-width: 30px 30px 0;
+  border-style: solid;
+  border-color: #333 transparent transparent;
+  /*灰 透明 透明 */
+  margin: 40px auto;
+  position: relative;
+}
+
+.triangle_border_down span {
+  display: block;
+  width: 0;
+  height: 0;
+  border-width: 28px 28px 0;
+  border-style: solid;
+  border-color: #fc0 transparent transparent;
+  /*黄 透明 透明 */
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+/*向左*/
+.triangle_border_left {
+  width: 0;
+  height: 0;
+  border-width: 30px 30px 30px 0;
+  border-style: solid;
+  border-color: transparent #333 transparent transparent;
+  /*透明 灰 透明 透明 */
+  margin: 40px auto;
+  position: relative;
+}
+
+.triangle_border_left span {
+  display: block;
+  width: 0;
+  height: 0;
+  border-width: 28px 28px 28px 0;
+  border-style: solid;
+  border-color: transparent #fc0 transparent transparent;
+  /*透明 黄 透明 透明 */
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+/*向右*/
+
+.triangle_border_right {
+  display: inline-block;
+  width: 0.07rem;
+  height: 0.08rem;
+  top: 0.05rem;
+  position: relative;
+  /* background: url('../img/vip/triangle.png') no-repeat center center; */
+  background-size: 100% 100%;
+}
+
+.ivu-select-visible .ivu-select-selection {
+  box-shadow: none;
+}
+
+@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {}
+
+/* 解决iphoneX问题——移动端H5适配iphoneX底部栏，css快速解决方案 */
+/* @supports (bottom: env(safe-area-inset-bottom)) {
+  .btnBox {
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+} */
+
+/* 公共按钮样式 */
+
+.zd,
+.bzj,
+.gf {
+  display: inline-block;
+  height: 0.16rem;
+  width: 0.16rem;
+  /* background: url("../img/common/icon_ding.png") no-repeat center center; */
+  background-size: 100% 100%;
+  position: relative;
+  top: 0.02rem;
+  margin-left: 0.04rem;
+}
+
+.bzj {
+  /* background: url("../img/common/icon_bao.png") no-repeat center center; */
+  background-size: 100% 100%;
+}
+
+.gf {
+  /* background: url("../img/common/icon_guanfang.png") no-repeat center center; */
+  background-size: 100% 100%;
+  width: 0.28rem;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 标签 */
+.tag {
+  background: rgba(246, 247, 248, 1);
+  border-radius: 2px;
+  margin-right: 0.05rem;
+  padding: 0.02rem;
+}
+
+/* 小竖线 */
+.line {
+  width: 1px;
+  height: 10px;
+  background: rgba(216, 216, 216, 1);
+  display: inline-block;
+  margin: 0 0.05rem;
+  position: relative;
+  top: 0.01rem;
+}
+
+/* 订单号 */
+.taskOrder {
+  display: inline-block;
+  font-size: 12px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #2f2f2f;
+  border-radius: 2px;
+  border: 1px solid rgba(47, 47, 47, 1);
+  text-align: center;
+  padding: 0 0.02rem;
+  height: 0.16rem;
+  line-height: 14px;
+  position: relative;
+  top: -0.02rem;
+  margin-right: 0.05rem;
+}
+
+/* 详情页面按钮样式 */
+/* 不通过按钮样式 */
+.btn_box {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.15rem;
+  font-size: 0.16rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 1);
+  text-align: center;
+  /* margin-top: 0.5rem; */
+  position: fixed;
+  bottom: 0rem;
+  width: 100%;
+  z-index: 10;
+  background: #fff;
+  padding-bottom: 0.21rem;
+}
+
+.btn_notPass,
+.btn_pass {
+  flex: 1;
+  border-radius: 6px;
+  padding: 0.13rem 0;
+}
+
+.btn_notPass {
+  background: #ff4a26;
+}
+
+.btn_pass {
+  background: #19da5f;
+  margin-left: 0.1rem;
+}
+
+.btn_gray {
+  background: rgba(216, 216, 216, 1);
+  border-radius: 25px;
+  color: rgba(94, 94, 94, 1);
+  padding: 0.13rem 0;
+  flex: 1;
+}
+
+.btn_black {
+  color: #ffcc33;
+  background: rgba(71, 71, 71, 1);
+  border-radius: 25px;
+  padding: 0.13rem 0;
+  flex: 1;
+}
+
+/* 立即报名 */
+.btn_singUp {
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(136deg,
+      rgba(254, 218, 77, 1) 0%,
+      rgba(254, 200, 77, 1) 100%);
+  border-radius: 25px;
+  color: rgba(47, 47, 47, 1);
+  padding: 0.06rem 0 .07rem 0;
+}
+
+.hasNum {
+  font-size: 0.1rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(47, 47, 47, 1);
+  position: relative;
+  top: -0.02rem;
+}
+
+/* 联系商家 */
+.btn_help {
+  flex: 0 0 1.15rem;
+  color: rgba(255, 204, 51, 1);
+  background: rgba(71, 71, 71, 1);
+  border-radius: 100px 0px 0px 100px;
+  padding: 0.13rem 0;
+}
+
+/* 提交审核 */
+.btn_oragne,
+.btn_agree {
+  color: rgba(47, 47, 47, 1);
+  background: linear-gradient(136deg,
+      rgba(254, 218, 77, 1) 0%,
+      rgba(254, 200, 77, 1) 100%);
+  border-radius: 0px 100px 100px 0px;
+  flex: 1;
+  padding: 0.13rem 0;
+}
+
+.btn_agree {
+  border-radius: 100px 0px 0px 100px;
+  background: #14c153;
+  color: #fff;
+}
+
+.btn_border {
+  border-radius: 25px;
+}
+
+/* 平台仲裁中 */
+.btn_zcIng,
+.btn_review {
+  background: rgba(216, 216, 216, 1);
+  border-radius: 0px 100px 100px 0px;
+  flex: 1;
+  padding: 0.13rem 0;
+  color: rgba(94, 94, 94, 1);
+}
+
+.btn_review {
+  padding: 0.04rem 0;
+}
+
+/* 超时提示 */
+.btn_info {
+  font-size: 0.1rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(94, 94, 94, 1);
+  position: relative;
+  top: -0.02rem;
+}
+
+/* 加票按钮 */
+.btn_addTicket {
+  color: rgba(47, 47, 47, 1);
+  background: linear-gradient(136deg,
+      rgba(254, 218, 77, 1) 0%,
+      rgba(254, 200, 77, 1) 100%);
+  border-radius: 100px 0px 0px 100px;
+  flex: 1;
+  padding: 0.13rem 0;
+}
+
+/* 暂停按钮 */
+.btn_suspend {
+  color: #fff;
+  background: rgba(71, 71, 71, 1);
+  flex: 1;
+  padding: 0.13rem 0;
+}
+
+.btn_open {
+  padding: 0.13rem 0;
+  flex: 1;
+  color: #fff;
+  background: rgba(20, 193, 83, 1);
+}
+
+/* 结束按钮 */
+.btn_end {
+  color: #fff;
+  background: rgba(255, 74, 38, 1);
+  border-radius: 0px 100px 100px 0px;
+  flex: 1;
+  padding: 0.13rem 0;
+}
+
+/* iphoneX、iphoneXs */
+@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+  .btn_rule_cancle {
+    height: 0.95rem;
+  }
+
+  .btn_box {
+    position: fixed;
+    padding-bottom: 0.35rem;
+  }
+
+  .fixed_toast .btn {
+    height: 0.95rem;
+  }
+}
+
+/* iphone Xs Max */
+@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) {
+  .btn_rule_cancle {
+    height: 0.95rem;
+  }
+
+  .btn_box {
+    position: fixed;
+    padding-bottom: 0.35rem;
+  }
+
+  .fixed_toast .btn {
+    height: 0.95rem;
+  }
+}
+
+/* iphone XR */
+@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+  .btn_box {
+    position: fixed;
+    padding-bottom: 0.35rem;
+  }
+
+  .btn_rule_cancle {
+    height: 0.95rem;
+  }
+
+  .fixed_toast .btn {
+    height: 0.95rem;
+  }
+}
+
+/* 横幅 */
+.hf_box {
+  background: #e8f7fe;
+  padding: 0.07rem 0.15rem 0.06rem 0.15rem;
+  font-size: 0.14rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(40, 178, 247, 1);
+}
+
+.hf_box_orange {
+  background: #fff5d6;
+  color: #ff880d;
+  text-align: center;
+}
+
+.bg_line {
+  height: 10px;
+  background: rgba(246, 247, 248, 1);
+  width: 100%;
+}
+
+.ps_rel {
+  position: relative;
+}
+
+.add_orange {
+  display: inline-block;
+  width: 0.08rem;
+  height: 0.08rem;
+  /* background: url("../img/common/add_orange.png") no-repeat center center; */
+  background-size: 100% 100%;
+  margin-right: 0.01rem;
+}
+
+/* 步骤条样式 */
+.ivu-steps-item.ivu-steps-status-wait .ivu-steps-head-inner {
+  background: #2f2f2f;
+  color: #fff;
+  font-size: 0.12rem;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  border: none;
+  width: 0.15rem;
+  height: 0.15rem;
+  line-height: 15px;
+  position: relative;
+  left: 0.06rem;
+}
+
+.ivu-steps-vertical .ivu-steps-tail {
+  padding: 0.1rem 0 0 0;
+  position: absolute;
+  top: 0.07rem;
+}
+
+.ivu-steps-item.ivu-steps-status-wait .ivu-steps-tail>i {
+  /* background: url("../img/common/icon_dashline.png") no-repeat center center; */
+  background-size: 100% 100%;
+}
+
+.ivu-steps .ivu-steps-head,
+.ivu-steps .ivu-steps-main {
+  margin-top: 0.05rem;
+}
+
+.ivu-steps-item.ivu-steps-status-wait .ivu-steps-title {
+  color: rgba(47, 47, 47, 1);
+}
+
+.ivu-steps .ivu-steps-head,
+.ivu-steps .ivu-steps-title {
+  background: none;
+}
+
+.ivu-steps .ivu-steps-title {
+  font-size: 0.14rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(47, 47, 47, 1);
+}
+
+.ivu-steps-vertical .ivu-steps-main .ivu-steps-title {
+  line-height: 21px;
+}
+
+/* 复选框样式 */
+.icon_check,
+.icon_checkAct {
+  display: inline-block;
+  width: 0.14rem;
+  height: 0.14rem;
+  /* background: url("../../assets/img/common/icon_check.png") no-repeat center center; */
+  background-size: 100% 100%;
+  position: relative;
+  top: 0.02rem;
+  margin-right: 0.08rem;
+}
+
+.icon_checkAct {
+  /* background: url("../../assets/img/common/icon_checkAct.png") no-repeat center center; */
+  background-size: 100% 100%;
+}
+
+/* 详情页——进行中、待审核 样式 */
+.right_icon_ing,
+.right_icon_zcing,
+.right_icon_overtime,
+.right_icon_agree,
+.right_icon_cancle {
+  font-size: 0.12rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(255, 136, 13, 1);
+  background: rgba(255, 245, 214, 1);
+  border-radius: 8px;
+  text-align: center;
+  min-width: 0.44rem;
+  padding: 0 0.04rem;
+  height: 0.18rem;
+  display: inline-block;
+  margin-left: auto;
+}
+
+.right_icon_zcing {
+  color: rgba(40, 178, 247, 1);
+  background: #e9f7fe;
+}
+
+/* 超时未提交、不采纳 */
+.right_icon_overtime {
+  background: rgba(254, 237, 236, 1);
+  color: #fb4e44;
+}
+
+/* 已采纳 */
+.right_icon_agree {
+  color: #14c153;
+  background: #e8fbef;
+}
+
+/* 已取消 */
+.right_icon_cancle {
+  color: #aaa;
+  background: #f6f7f8;
+}
+
+/* 不采纳 */
+.right_icon_accept,
+.right_icon_notAccept,
+.right_icon_all_repeat {
+  display: inline-block;
+  min-width: 68px;
+  background: rgba(232, 251, 239, 1);
+  border-radius: 6px;
+  font-size: 0.14rem;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  padding: 0.07rem 0.13rem 0.06rem;
+  text-align: center;
+}
+
+.right_icon_accept {
+  color: #0dd255;
+  background: rgba(232, 251, 239, 1);
+}
+
+.right_icon_notAccept {
+  background: rgba(254, 237, 236, 1);
+  color: #fb4e44;
+  margin-right: 0.08rem;
+}
+
+/* 一建采纳 */
+.right_icon_all_repeat {
+  background: #14c153;
+  color: #fff;
+  padding: 0.07rem 0.16rem 0.06rem;
+}
+
+.bg {
+  width: 100%;
+  height: 0.1rem;
+  background: #f6f7f8;
+}
+
+.con_box input[disabled] {
+  color: #D8D8D8;
+  -webkit-opacity: 1;
+  -webkit-text-fill-color: #D8D8D8;
+  background: #F6F7F8;
+  opacity: 1 !important;
+}
+
+.con_box .temp input[disabled] {
+  color: #2f2f2f;
+  -webkit-opacity: 1;
+  -webkit-text-fill-color: #2f2f2f;
+  opacity: 1 !important;
+}
