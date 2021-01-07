@@ -275,6 +275,118 @@
   font-size: 0.16rem;
   margin-top: 0.15rem;
 } */
+>>> .van-overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+>>> .van-popup--bottom {
+  border-radius: 0.1rem 0.1rem 0 0;
+}
+.toast_box {
+  /* height: 4.86rem; */
+}
+.toast_top {
+  margin-top: 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.2rem;
+  padding: 0 0.1rem;
+}
+.toast_top span {
+  color: #2f2f2f;
+  font-size: 0.16rem;
+  font-weight: 600;
+  line-height: 0.16rem;
+}
+.toast_top img {
+  width: 0.16rem;
+  height: 0.16rem;
+  margin-right: 0.02rem;
+}
+.vip_level {
+  width: 100%;
+  padding: 0 0.05rem;
+}
+.vip_level img {
+  width: 100%;
+}
+.choose_title {
+  display: flex;
+  align-items: center;
+  padding: 0 0.1rem;
+}
+.choose_title img {
+  width: 0.22rem;
+}
+.choose_icon {
+  width: 0.03rem;
+  height: 0.18rem;
+  background: #ff5618;
+}
+.choose_title span {
+  font-size: 0.14rem;
+  color: #999;
+  line-height: 0.14rem;
+  font-weight: 600;
+  margin-left: 0.08rem;
+}
+.pay_box {
+  padding: 0 0.1rem;
+  display: flex;
+  margin-top: 0.12rem;
+}
+.pay_way {
+  width: 1.2rem;
+  height: 0.5rem;
+  border-radius: 0.04rem;
+  border: 0.01rem solid #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.1rem;
+  position: relative;
+}
+.choose_pay_way {
+  background: rgba(255, 228, 228, 0.24);
+  border: 0.01rem solid #ff4022;
+}
+.pay_icon {
+  width: 0.2rem;
+}
+.pay_name {
+  color: #333;
+  font-size: 0.14rem;
+  font-weight: 600;
+  line-height: 0.14rem;
+  margin-left: 0.08rem;
+}
+.pay_choose {
+  width: 0.19rem;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.agreement {
+  color: #999999;
+  font-size: 0.12rem;
+  margin-left: 0.2rem;
+  margin-top: 0.1rem;
+  line-height: 0.12rem;
+}
+.pay_btn {
+  width: 86%;
+  height: 0.5rem;
+  margin-left: 7%;
+  margin-top: 0.3rem;
+  margin-bottom: 0.39rem;
+  background: linear-gradient(135deg, #ff9c0d 0%, #ff5618 100%);
+  border-radius: 0.25rem;
+  color: #fff;
+  font-size: 0.16rem;
+  font-weight: 600;
+  line-height: 0.5rem;
+  text-align: center;
+}
 </style>
 <template>
   <div class="wrap">
@@ -288,7 +400,9 @@
             <p>{{ endTime }}到期</p>
           </div>
         </div>
-        <!-- <div class="member_pay">立即续费</div> -->
+        <div class="member_pay"
+             @click="moreVip"
+             v-if="this.leftDay<=10">立即续费</div>
       </div>
       <div class="top_card"
            :class="{'level_type_gold':userInfo.memberLevel=='黄金会员','level_type_dlamond':userInfo.memberLevel=='钻石会员'}"
@@ -384,10 +498,62 @@
         </van-tab>
       </van-tabs>
     </div>
+    <!-- 续费弹窗 -->
+    <van-popup v-model="showToast"
+               position="bottom">
+      <div class="toast_box">
+        <div class="toast_top">
+          <span>选择会员</span>
+          <img src="@/assets/img/vip/close_toast.png"
+               alt=""
+               @click="showToast=false">
+        </div>
+        <div class="vip_level">
+          <div @click="chooseVip(1)">
+            <img :src="require(`@/assets/img/vip/vip_zs${vipActive}.png`)"
+                 alt="">
+          </div>
+          <div @click="chooseVip(2)">
+            <img :src="require(`@/assets/img/vip/vip_hj${vipActive}.png`)"
+                 alt="">
+          </div>
+        </div>
+        <div class="choose_title">
+          <!-- <img src="@/assets/img/vip/vip_choose_icon.png"
+               alt=""> -->
+          <div class="choose_icon"></div>
+          <span>选择支付方式</span>
+        </div>
+        <div class="pay_box">
+          <div class="pay_way"
+               v-for="item in payList"
+               :key="item.num"
+               @click="choosePayWay(item.num)"
+               :class="{'choose_pay_way':item.num == payActive}"
+               v-show="item.showPay">
+            <img class="pay_icon"
+                 :src="item.icon"
+                 alt="">
+            <span class="pay_name">{{item.name}}</span>
+            <img v-show="item.num == payActive"
+                 class="pay_choose"
+                 src="@/assets/img/vip/pay_choose.png"
+                 alt="">
+          </div>
+        </div>
+        <span class="agreement"
+              @click="toMemberService">确认支付表示您已阅读并同意《会员服务协议》</span>
+        <div class="pay_btn"
+             @click="renew">确定支付{{payMoney}}元</div>
+      </div>
+    </van-popup>
   </div>
 </template>
 <script>
 import Tickets from "../../components/tickets";
+import moment from "moment";
+import alipay from "../../assets/img/vip/icon_alipay.png";
+import wechat from "../../assets/img/vip/icon_wx.png";
 
 export default {
   components: {
@@ -411,12 +577,35 @@ export default {
       getTicketList: [], //抢单券列表
       chargebackList: [], //退单券
       os: 1,//1安卓  2ios
+      today: moment().format("YYYY-MM-DD HH:mm:ss"),//当前时间
+      leftDay: 20,//剩余时间
+      showToast: false,//弹窗展示
+      vipActive: 1,//1钻石会员 2黄金会员
+      payMoney: 0,//需要续费支付的钱
+      payActive: 0,//0 支付宝 1微信
+      payList: [
+        {
+          name: "支付宝",
+          icon: alipay,
+          num: 0,
+          showPay: true
+        },
+        {
+          name: "微信支付",
+          icon: wechat,
+          num: 1,
+          showPay: false
+        },
+      ],
+      memberList: [],//会员列表
+      memberId: 2,//选择会员的id
     };
   },
   created () {
     this.os = localStorage.getItem("os");
     this.util.title("会员中心");
     this.getMemberInfo();
+    this.getMember();
     this.getCouponList();
     this.rechargeTicket(2);
     this.rechargeTicket(3);
@@ -425,6 +614,21 @@ export default {
   mounted () { },
   computed: {},
   methods: {
+    choosePayWay (num) {//选择支付方式
+      this.payActive = num;
+    },
+    chooseVip (level) {//选择充值vip等级
+      this.vipActive = level;
+      console.log(level)
+      this.payMoney = this.memberList[this.vipActive - 1].content;
+      this.memberId = this.memberList[this.vipActive - 1].id;
+    },
+    moreVip () {//立即续费
+      this.showToast = true;
+    },
+    toMemberService () {//会员协议
+      window.location.href = "/agreeHtml/memberService.html";
+    },
     getMemberInfo () {
       //获取用户会员信息
       this.$get("/app/admin/v1/member/memberInfo")
@@ -434,6 +638,7 @@ export default {
             this.userInfo = res.data[0];
             this.endTime = this.userInfo.expiryTime.split(" ")[0];
             console.log(this.userInfo.expiryTime.split(" "));
+            this.leftDay = moment(this.userInfo.expiryTime).diff(moment(this.today), 'days')
           } else {
             this.util.toast({ msg: res.message, type: "fail" });
           }
@@ -444,7 +649,7 @@ export default {
       //获取已领取的抢单券信息
       this.$get("/app/admin/v1/member/couponList")
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.code == 200) {
             this.couponList = res.data;
           } else {
@@ -473,7 +678,7 @@ export default {
       //获取充值券信息
       this.$get("/app/admin/v1/member/couponInfo", { typeState: typeState })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.code == 200) {
             if (typeState == 2) {
               //抢单券
@@ -500,6 +705,64 @@ export default {
         }
       } else {
         return "立即领取";
+      }
+    },
+    getMember () {//获取会员信息
+      this.$get("/app/admin/v1/member/memberLevelfo")
+        .then((res) => {
+          console.log(res);
+          if (res.code == 200) {
+            this.memberList = res.data;
+            this.payMoney = this.memberList[0].content;
+            this.memberId = this.memberList[0].id;
+          } else {
+            this.util.toast({ msg: res.message, type: "fail" });
+          }
+        })
+        .catch((err) => { });
+    },
+    renew () {//续费
+      if (this.payActive == 0) {//支付宝
+        this.$post(
+          "/app/v1/pay/aliPay/member?content=" + this.payMoney + '&id=' + this.memberId
+        ).then((res) => {
+          console.log(res);
+          this.showToast = false;
+          if (res.code == 200) {
+            let param = {
+              str1: res.data,
+              str2: 'vip'
+            }
+            try {
+              window.webkit.messageHandlers.newAliPay.postMessage(param); //ios
+            } catch (err) {
+              window.AppJs.newAliPay(res.data, 'vip'); //android
+            }
+          } else {
+            this.util.toast({ msg: res.msg, type: "fail" });
+          }
+        });
+      } else if (this.payActive == 1) {//微信
+        this.$post("/app/v1/pay/wxpay/member?content=" + this.payMoney + '&id=' + this.memberId)
+          .then(
+            (res) => {
+              console.log(res);
+              this.showToast = false;
+              if (res.code == 200) {
+                let param = {
+                  str1: res.data,
+                  str2: 'vip'
+                }
+                try {
+                  window.webkit.messageHandlers.newWeChatPay.postMessage(param); //ios
+                } catch (err) {
+                  window.AppJs.newWeChatPay(JSON.stringify(res.data), 'vip'); //android
+                }
+              } else {
+                this.util.toast({ msg: res.msg, type: "fail" });
+              }
+            }
+          );
       }
     },
     useDetail () {

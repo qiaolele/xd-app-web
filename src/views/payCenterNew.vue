@@ -666,7 +666,7 @@ export default {
         : localStorage.getItem("udid");
 
     this.appVersion = localStorage.getItem("appVersion");
-    this.checkPluginNew(this.appVersion, "1.0.9"); //ios大于等于 1.0.9 内购 并且appstore
+    this.checkPluginNew(this.appVersion, "1.1.1"); //ios大于等于 1.1.1 内购 并且appstore
     this.checkPluginNewVersion(this.appVersion, '1.0.1')//ios大于等于 1.0.1 内购 并且appstore1
     this.checkPlugin(this.appVersion, "1.0.2"); //安卓版本号大于1.2.0 显示微信
     if (this.os == 1) {
@@ -678,8 +678,8 @@ export default {
       }
       this.choosePayWay = 1;
     } else {
-      if (this.channel == "appstore" && this.newAppVersion //版本大于等于 1.0.9显示内购
-        || this.channel == 'appstore1' && this.appVersionNew) {//版本大于等于 1.0.1显示内购
+      if (this.channel == 'appstore1' && this.appVersionNew) {//版本大于等于 1.0.1显示内购
+        //this.channel == "appstore" && this.newAppVersion //版本大于等于 1.1.1显示内购
         this.payList[0].show = true;
         // this.payList[1].show = true;
         // this.payList[2].show = true;

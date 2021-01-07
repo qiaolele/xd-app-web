@@ -67,6 +67,11 @@ export default new Router({
       component: () => import("./views/vip/userMember"), //vip会员
     },
     {
+      path: "/vip/member",
+      name: "vip/member",
+      component: () => import("./views/vip/member"), //开通vip会员
+    },
+    {
       path: "/vip/vipDescription",
       name: "vip/vipDescription",
       component: () => import("./views/vip/vipDescription"), //会员权益说明
