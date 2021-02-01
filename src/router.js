@@ -96,5 +96,20 @@ export default new Router({
       name: "/activity/grabbingList",
       component: () => import("./views/activity/grabbingList"), //免费秒抢列表
     },
+    {
+      path: "/file/transactionDetail",
+      name: "file/transactionDetail",
+      component: () => import("./views/file/transactionDetail"), //交易明细
+    },
+    {
+      path: "/file/creditRules",
+      name: "file/creditRules",
+      component: () => import("./views/file/creditRules"), //信用分规则
+    },
+    {
+      path: "/creditScore",
+      name: "creditScore",
+      component: () => import("./views/creditScore"), //信用分
+    },
   ],
 });

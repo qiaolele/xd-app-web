@@ -317,7 +317,7 @@ export default {
 
     this.appVersion = localStorage.getItem('appVersion');
     this.checkPluginNew(this.appVersion, '1.0.9');//ios大于等于 1.0.9 内购 并且appstore
-    this.checkPluginNewVersion(this.appVersion, '1.0.1')//ios大于等于 1.0.1 内购 并且appstore1
+    this.checkPluginNewVersion(this.appVersion, '2.0.0')//ios大于等于 1.0.1 内购 并且appstore1
     this.checkPlugin(this.appVersion, '1.0.2');//安卓版本号大于1.0.2 显示微信
     if (this.os == 1) {
       //安卓
@@ -329,7 +329,7 @@ export default {
       this.choosePayWay = 1;
     } else {
       if (this.channel == 'appstore' && this.newAppVersion //版本大于等于 1.0.9显示内购
-        || this.channel == 'appstore1' && this.appVersionNew) {//版本大于等于 1.0.1显示内购
+        || this.channel == 'xyhappstore1' && this.appVersionNew) {//版本大于等于 1.0.1显示内购
         this.payList[0].show = true;
         // this.payList[1].show = true;
         // this.payList[2].show = true;

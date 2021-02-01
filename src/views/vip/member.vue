@@ -304,6 +304,21 @@
   text-align: center;
   line-height: 0.5rem;
   margin-top: 0.3rem;
+  position: relative;
+}
+.has_deduc {
+  height: 0.24rem;
+  background: #ffeee7;
+  border-radius: 0.12rem 0.12rem 0.12rem 0.04rem;
+  line-height: 0.24rem;
+  text-align: center;
+  font-size: 0.12rem;
+  color: #ff8a18;
+  font-weight: 400;
+  padding: 0 0.04rem;
+  position: absolute;
+  right: 0;
+  top: -0.08rem;
 }
 .card {
   background: #ffffff;
@@ -482,7 +497,11 @@
           确认支付表示您已阅读并同意《会员服务协议》
         </p>
         <div class="pay_money"
-             @click="payMoney">确定支付</div>
+             @click="payMoney">
+          确定支付
+          <div class="has_deduc"
+               v-if="memberRemark">{{memberRemark}}</div>
+        </div>
       </div>
     </van-overlay>
   </div>
@@ -497,6 +516,7 @@ export default {
       checkIndex: 0, //0：钻石会员；1：黄金会员
       memberId: 2,//选择会员的id
       memberMoney: 0, //会员付款金额
+      memberRemark: '',
       prepared: 0, //原价
       memberInfo: [],
       lunboList: [],
@@ -586,6 +606,7 @@ export default {
             this.memberId = this.memberInfo[0].id;
             // this.memberMoney = this.memberInfo[0].content.replace(regexp, '$1');
             this.memberMoney = this.memberInfo[0].content;
+            this.memberRemark = this.memberInfo[0].remark;
             this.prepared = this.memberInfo[0].prepared;
             console.log(this.memberMoney);
           } else {
@@ -601,6 +622,7 @@ export default {
       this.memberId = this.memberInfo[this.checkIndex].id;
       // this.memberMoney = this.memberInfo[this.checkIndex].content.replace(regexp, '$1');
       this.memberMoney = this.memberInfo[this.checkIndex].content;
+      this.memberRemark = this.memberInfo[this.checkIndex].remark;
       this.prepared = this.memberInfo[this.checkIndex].prepared;
     },
     checkRight () {
@@ -610,6 +632,7 @@ export default {
       this.memberId = this.memberInfo[this.checkIndex].id;
       // this.memberMoney = this.memberInfo[this.checkIndex].content.replace(regexp, '$1');
       this.memberMoney = this.memberInfo[this.checkIndex].content;
+      this.memberRemark = this.memberInfo[this.checkIndex].remark;
       this.prepared = this.memberInfo[this.checkIndex].prepared;
     },
     toCheckPay (num) {
@@ -625,14 +648,18 @@ export default {
           console.log(res);
           if (res.code == 200) {
             this.showToast = false;
-            let param = {
-              str1: res.data,
-              str2: 'vip'
-            }
-            try {
-              window.webkit.messageHandlers.newAliPay.postMessage(param); //ios
-            } catch (err) {
-              window.AppJs.newAliPay(res.data, 'vip'); //android
+            if (res.data) {
+              let param = {
+                str1: res.data,
+                str2: 'vip'
+              }
+              try {
+                window.webkit.messageHandlers.newAliPay.postMessage(param); //ios
+              } catch (err) {
+                window.AppJs.newAliPay(res.data, 'vip'); //android
+              }
+            } else {
+              this.$emit('update-page');
             }
           } else {
             this.util.toast({ msg: res.msg, type: "fail" });
@@ -646,14 +673,18 @@ export default {
               console.log(res);
               if (res.code == 200) {
                 this.showToast = false;
-                let param = {
-                  str1: res.data,
-                  str2: 'vip'
-                }
-                try {
-                  window.webkit.messageHandlers.newWeChatPay.postMessage(param); //ios
-                } catch (err) {
-                  window.AppJs.newWeChatPay(JSON.stringify(res.data), 'vip'); //android
+                if (res.data) {
+                  let param = {
+                    str1: res.data,
+                    str2: 'vip'
+                  }
+                  try {
+                    window.webkit.messageHandlers.newWeChatPay.postMessage(param); //ios
+                  } catch (err) {
+                    window.AppJs.newWeChatPay(JSON.stringify(res.data), 'vip'); //android
+                  }
+                } else {
+                  this.$emit('update-page');
                 }
               } else {
                 this.util.toast({ msg: res.msg, type: "fail" });

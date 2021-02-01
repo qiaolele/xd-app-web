@@ -386,6 +386,21 @@
   font-weight: 600;
   line-height: 0.5rem;
   text-align: center;
+  position: relative;
+}
+.has_deduc {
+  height: 0.24rem;
+  background: #ffeee7;
+  border-radius: 0.12rem 0.12rem 0.12rem 0.04rem;
+  line-height: 0.24rem;
+  text-align: center;
+  font-size: 0.12rem;
+  color: #ff8a18;
+  font-weight: 400;
+  padding: 0 0.04rem;
+  position: absolute;
+  right: 0;
+  top: -0.1rem;
 }
 </style>
 <template>
@@ -544,7 +559,11 @@
         <span class="agreement"
               @click="toMemberService">确认支付表示您已阅读并同意《会员服务协议》</span>
         <div class="pay_btn"
-             @click="renew">确定支付{{payMoney}}元</div>
+             @click="renew">
+          确定支付{{payMoney}}元
+          <div class="has_deduc"
+               v-if="memberRemark">{{memberRemark}}</div>
+        </div>
       </div>
     </van-popup>
   </div>
@@ -582,6 +601,7 @@ export default {
       showToast: false,//弹窗展示
       vipActive: 1,//1钻石会员 2黄金会员
       payMoney: 0,//需要续费支付的钱
+      memberRemark: '',//是否抵扣文案
       payActive: 0,//0 支付宝 1微信
       payList: [
         {
@@ -621,6 +641,7 @@ export default {
       this.vipActive = level;
       console.log(level)
       this.payMoney = this.memberList[this.vipActive - 1].content;
+      this.memberRemark = this.memberList[this.vipActive - 1].remark;
       this.memberId = this.memberList[this.vipActive - 1].id;
     },
     moreVip () {//立即续费
@@ -714,6 +735,7 @@ export default {
           if (res.code == 200) {
             this.memberList = res.data;
             this.payMoney = this.memberList[0].content;
+            this.memberRemark = this.memberList[0].remark;
             this.memberId = this.memberList[0].id;
           } else {
             this.util.toast({ msg: res.message, type: "fail" });
@@ -729,14 +751,23 @@ export default {
           console.log(res);
           this.showToast = false;
           if (res.code == 200) {
-            let param = {
-              str1: res.data,
-              str2: 'vip'
-            }
-            try {
-              window.webkit.messageHandlers.newAliPay.postMessage(param); //ios
-            } catch (err) {
-              window.AppJs.newAliPay(res.data, 'vip'); //android
+            if (res.data) {
+              let param = {
+                str1: res.data,
+                str2: 'vip'
+              }
+              try {
+                window.webkit.messageHandlers.newAliPay.postMessage(param); //ios
+              } catch (err) {
+                window.AppJs.newAliPay(res.data, 'vip'); //android
+              }
+            } else {
+              this.getMemberInfo();
+              this.getMember();
+              this.getCouponList();
+              this.rechargeTicket(2);
+              this.rechargeTicket(3);
+              this.rechargeTicket(4);
             }
           } else {
             this.util.toast({ msg: res.msg, type: "fail" });
@@ -749,14 +780,23 @@ export default {
               console.log(res);
               this.showToast = false;
               if (res.code == 200) {
-                let param = {
-                  str1: res.data,
-                  str2: 'vip'
-                }
-                try {
-                  window.webkit.messageHandlers.newWeChatPay.postMessage(param); //ios
-                } catch (err) {
-                  window.AppJs.newWeChatPay(JSON.stringify(res.data), 'vip'); //android
+                if (res.data) {
+                  let param = {
+                    str1: res.data,
+                    str2: 'vip'
+                  }
+                  try {
+                    window.webkit.messageHandlers.newWeChatPay.postMessage(param); //ios
+                  } catch (err) {
+                    window.AppJs.newWeChatPay(JSON.stringify(res.data), 'vip'); //android
+                  }
+                } else {
+                  this.getMemberInfo();
+                  this.getMember();
+                  this.getCouponList();
+                  this.rechargeTicket(2);
+                  this.rechargeTicket(3);
+                  this.rechargeTicket(4);
                 }
               } else {
                 this.util.toast({ msg: res.msg, type: "fail" });

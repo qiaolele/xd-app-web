@@ -142,12 +142,22 @@
         </div>
       </div>
     </div>
+    <!-- 是否封号 -->
+    <Prohibit :titleToast="titleToast"
+              :titleTips="titleTips"></Prohibit>
   </div>
 </template>
 <script>
+import Prohibit from '../components/prohibit'
+
 export default {
+  components: {
+    Prohibit
+  },
   data () {
     return {
+      titleToast: false,//封号弹窗
+      titleTips: '',//封号信息
       leftGoldCount: 0,
       list: [],
     };
@@ -167,7 +177,9 @@ export default {
           this.leftGoldCount = res.data.goldCount;
           this.list = res.data.prepaidList;
         } else {
-          this.util.toast({ msg: res.message, type: "fail" });
+          // this.util.toast({ msg: res.msg, type: "fail" });
+          this.titleTips = res.msg;
+          this.titleToast = true;
         }
       });
     },

@@ -472,16 +472,26 @@
         </div>
       </div>
     </van-overlay>
+    <!-- 是否封号 -->
+    <Prohibit :titleToast="titleToast"
+              :titleTips="titleTips"></Prohibit>
   </div>
 </template>
 
 <script>
 import QRCode from "qrcodejs2";
 import html2canvas from "html2canvas";
+import Prohibit from '../../components/prohibit'
+
 
 export default {
+  components: {
+    Prohibit
+  },
   data () {
     return {
+      titleToast: false,//封号弹窗
+      titleTips: '',//封号信息
       toastShow: false, //弹窗
       shareUrl: "",
       imgScr: "",
@@ -518,7 +528,9 @@ export default {
         if (res.code == 200) {
           this.inviteInfo = res.data;
         } else {
-          this.util.toast({ msg: res.msg, type: "fail" });
+          // this.util.toast({ msg: res.msg, type: "fail" });
+          this.titleTips = res.msg;
+          this.titleToast = true;
         }
       });
     },
@@ -536,7 +548,9 @@ export default {
             this.inviteList = res.data;
           }
         } else {
-          this.util.toast({ msg: res.msg, type: "fail" });
+          // this.util.toast({ msg: res.msg, type: "fail" });
+          this.titleTips = res.msg;
+          this.titleToast = true;
         }
       });
     },
@@ -547,7 +561,9 @@ export default {
         if (res.code == 200) {
           this.shareUrl = res.data.inviteLink;
         } else {
-          this.util.toast({ msg: res.msg, type: "fail" });
+          // this.util.toast({ msg: res.msg, type: "fail" });
+          this.titleTips = res.msg;
+          this.titleToast = true;
         }
       });
     },

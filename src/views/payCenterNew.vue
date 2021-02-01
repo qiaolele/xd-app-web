@@ -596,6 +596,9 @@
         </div>
       </div>
     </van-popup>
+    <!-- 是否封号 -->
+    <Prohibit :titleToast="titleToast"
+              :titleTips="titleTips"></Prohibit>
   </div>
 </template>
 <script>
@@ -604,10 +607,17 @@ import icon_choice2 from "../assets/img/icon_choice2.png";
 import alipay from "../assets/img/icon_alipay.png";
 import appPay from "../assets/img/icon_applepay.png";
 import wechat from "../assets/img/icon_wecat_pay.png";
+import Prohibit from '../components/prohibit'
+
 
 export default {
+  components: {
+    Prohibit
+  },
   data () {
     return {
+      titleToast: false,//封号弹窗
+      titleTips: '',//封号信息
       cardActive: 1, //充值金额
       chooseModeImgApp: icon_choice1,
       chooseModeImgApp2: icon_choice2,
@@ -666,8 +676,8 @@ export default {
         : localStorage.getItem("udid");
 
     this.appVersion = localStorage.getItem("appVersion");
-    this.checkPluginNew(this.appVersion, "1.1.1"); //ios大于等于 1.1.1 内购 并且appstore
-    this.checkPluginNewVersion(this.appVersion, '1.0.1')//ios大于等于 1.0.1 内购 并且appstore1
+    this.checkPluginNew(this.appVersion, "1.1.2"); //ios大于等于 1.1.1 内购 并且appstore
+    this.checkPluginNewVersion(this.appVersion, '2.0.0')//ios大于等于 1.0.1 内购 并且appstore1
     this.checkPlugin(this.appVersion, "1.0.2"); //安卓版本号大于1.2.0 显示微信
     if (this.os == 1) {
       //安卓
@@ -678,12 +688,13 @@ export default {
       }
       this.choosePayWay = 1;
     } else {
-      if (this.channel == 'appstore1' && this.appVersionNew) {//版本大于等于 1.0.1显示内购
+      if (this.channel == "appstore" && this.newAppVersion) {//版本大于等于 1.0.1显示内购
+        // this.channel == 'appstore1' && this.appVersionNew ||
         //this.channel == "appstore" && this.newAppVersion //版本大于等于 1.1.1显示内购
-        this.payList[0].show = true;
-        // this.payList[1].show = true;
+        // this.payList[0].show = true;
+        this.payList[1].show = true;
         // this.payList[2].show = true;
-        this.choosePayWay = 0;
+        this.choosePayWay = 1;
       } else {
         //支付宝
         this.payList[1].show = true;
@@ -755,7 +766,9 @@ export default {
             //埋点
             this.toCountPoint("h5_vouchercenter_view");
           } else {
-            this.util.toast({ msg: res.message, type: "fail" });
+            // this.util.toast({ msg: res.msg, type: "fail" });
+            this.titleTips = res.msg;
+            this.titleToast = true;
           }
         })
         .catch((err) => { });
@@ -807,7 +820,7 @@ export default {
         .then((res) => {
           if (res.code == 200) {
           } else {
-            this.util.toast({ msg: res.message });
+            this.util.toast({ msg: res.msg });
           }
         })
         .catch((error) => { });
@@ -830,7 +843,7 @@ export default {
               this.activeIndex = "";
             }
           } else {
-            this.util.toast({ msg: res.message, type: "fail" });
+            this.util.toast({ msg: res.msg, type: "fail" });
           }
         })
         .catch((err) => { });
@@ -866,7 +879,7 @@ export default {
             this.couponInfo = res.data;
             this.showPopup = false;
           } else {
-            this.util.toast({ msg: res.message, type: "fail" });
+            this.util.toast({ msg: res.msg, type: "fail" });
           }
         })
         .catch((err) => { });
@@ -894,7 +907,7 @@ export default {
               )[0].id;
             }
           } else {
-            this.util.toast({ msg: res.message, type: "fail" });
+            this.util.toast({ msg: res.msg, type: "fail" });
           }
         })
         .catch((err) => { });
