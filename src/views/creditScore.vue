@@ -219,18 +219,21 @@
         <div class="list"
              v-for="item in listArr"
              :key="item.busType">
-          <div class="list_left">
-            <img :src="require(`@/assets/img/credit_task_icon${item.busType-1}.png`)"
-                 alt="">
-          </div>
-          <div class="list_right">
-            <div class="task_info">
-              <p class="task_title">{{item.title}}</p>
-              <p class="task_add_num">{{item.description}}</p>
+          <div class="list"
+               v-show="isWeeklyMember&&item.busType!=2 || !isWeeklyMember">
+            <div class="list_left">
+              <img :src="require(`@/assets/img/credit_task_icon${item.busType-1}.png`)"
+                   alt="">
             </div>
-            <div class="list_btn"
-                 :class="{'list_btn_com':item.status==1}"
-                 @click="doTask(item.busType,item.status)">{{item.status==1?'已完成':'去加分'}}</div>
+            <div class="list_right">
+              <div class="task_info">
+                <p class="task_title">{{item.title}}</p>
+                <p class="task_add_num">{{item.description}}</p>
+              </div>
+              <div class="list_btn"
+                   :class="{'list_btn_com':item.status==1}"
+                   @click="doTask(item.busType,item.status)">{{item.status==1?'已完成':'去加分'}}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -287,11 +290,13 @@ export default {
       listArr: [],//任务列表
       memberArr: [],//会员列表
       info: {},//所有信息
+      isWeeklyMember: false
     }
   },
   created () {
     this.util.title("信用分");
     this.getInfo();
+    this.getMember();
   },
   methods: {
     getInfo () {
@@ -309,6 +314,21 @@ export default {
           }
         })
         .catch((error) => { });
+    },
+    getMember () {
+      this.$get("/app/admin/v1/member/memberInfoState").then((res) => {
+        // console.log(res);
+        this.showPage = true;
+        if (res.code == 200) {
+          if (res.data.userInFo && res.data.userInFo.memberLevel == '周卡会员') {
+            this.isWeeklyMember = true;
+          } else {
+            this.isWeeklyMember = false;
+          }
+        } else {
+          this.util.toast({ msg: res.message, type: "fail" });
+        }
+      });
     },
     doTask (busType, status) {
       if (status == 0) {

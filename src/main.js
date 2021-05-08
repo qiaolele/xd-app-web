@@ -86,6 +86,8 @@ import {
   Popup,
   Loading,
   CountDown,
+  Uploader,
+  Picker,
 } from "vant";
 Vue.use(ShareSheet)
   .use(Toast)
@@ -106,7 +108,9 @@ Vue.use(ShareSheet)
   .use(NoticeBar)
   .use(Popup)
   .use(Loading)
-  .use(CountDown);
+  .use(CountDown)
+  .use(Uploader)
+  .use(Picker);
 
 new Vue({
   router,

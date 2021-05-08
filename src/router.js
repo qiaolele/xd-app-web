@@ -111,5 +111,20 @@ export default new Router({
       name: "creditScore",
       component: () => import("./views/creditScore"), //信用分
     },
+    {
+      path: "/activity/weeklyMember",
+      name: "activity/weeklyMember",
+      component: () => import("./views/activity/weeklyMember"), //会员体验卡
+    },
+    {
+      path: "/activity/chargeBack",
+      name: "activity/chargeBack",
+      component: () => import("./views/activity/chargeBack"), //退单申请
+    },
+    {
+      path: "/activity/chargeBackSuccess",
+      name: "activity/chargeBackSuccess",
+      component: () => import("./views/activity/chargeBackSuccess"), //退单申请成功
+    },
   ],
 });

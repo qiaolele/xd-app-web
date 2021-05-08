@@ -581,7 +581,7 @@ export default {
   data () {
     return {
       active: 0, //tab切换
-      userInfo: {}, //以后会员信息
+      userInfo: {}, //用户会员信息
       endTime: "", //到期时间
       grabbingList: [
         //会员每日可领抢单券

@@ -87,9 +87,15 @@ export default {
         .catch((err) => { });
     },
     ckickBtn () {
-      this.$router.push({
-        path: "/vip/userMember",
-      });
+      if (this.memberType == '周卡会员') {
+        this.$router.push({
+          path: "/activity/weeklyMember",
+        });
+      } else {
+        this.$router.push({
+          path: "/vip/userMember",
+        });
+      }
     }
   },
 };
