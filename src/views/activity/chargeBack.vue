@@ -200,7 +200,7 @@
       </van-popup>
       <!--  -->
       <div class="show_pic">
-        <p>证明材料（通话视频）</p>
+        <p>通话视频（录屏请开启麦克风）</p>
         <div class="prove">
           <!-- <div class="info_pic">
             <div class="forPreview_video"
@@ -221,15 +221,18 @@
           </div> -->
           <div>
             <div class="forPreview_video"
-                 v-show="videoSrc!=''">
-              <video class="audio_img"
-                     :src="videoSrc"></video>
+                 v-show="videoUrl!=''">
+              <!-- <video class="audio_img"
+                     :src="videoSrc"></video> -->
+              <img :src="videoUrl"
+                   class="audio_img"
+                   alt="">
               <div class="van-uploader__preview-delete"
                    @click="removeVideo">
                 <i class="van-icon van-icon-cross van-uploader__preview-delete-icon"></i>
               </div>
             </div>
-            <van-uploader :before-read="beforeReadAudio"
+            <van-uploader :before-read="beforeReadVideo"
                           :max-count="1"
                           accept="video/*"
                           v-show="videoSrc==''"
@@ -294,7 +297,8 @@ export default {
       chargeReason: '',//退单理由
       imgList: [],//图片列表
       audioList: [],//音频
-      videoSrc: '',
+      videoSrc: '',//视频链接
+      videoUrl: '',//视频封面
       orderId: Number,//订单id
       chargeInfo: {},//退单信息
       showCoupon: true,//是否显示
@@ -362,7 +366,30 @@ export default {
         })
         .catch((error) => { });
     },
-    beforeReadAudio (file) {
+    beforeReadVideo (file) {
+      console.log(file);
+      let formData = new FormData(); // 为上传文件定义一个formData对象
+      let config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      };
+      formData.append('file', file);
+      this.showLoading = true;
+      this.$post("/app/file/uploadWithImg", formData, config)
+        .then((res) => {
+          console.log(res);
+          this.showLoading = false;
+          if (res.code == 200) {
+            this.videoSrc = res.data.videoUrl;
+            this.videoUrl = res.data.coverImg;
+          } else {
+            this.util.toast({ msg: e.msg });
+          }
+        })
+        .catch((error) => { });
+    },
+    beforeReadAudio (file) {//上传音频
       console.log(file);
       let formData = new FormData(); // 为上传文件定义一个formData对象
       let config = {
@@ -377,8 +404,8 @@ export default {
           console.log(res);
           this.showLoading = false;
           if (res.code == 200) {
-            this.videoSrc = res.data;
-            // this.audioList.push(res.data);//音频
+            // this.videoSrc = res.data;
+            this.audioList.push(res.data);//音频
           } else {
             this.util.toast({ msg: e.msg });
           }
@@ -387,6 +414,7 @@ export default {
     },
     removeVideo () {
       this.videoSrc = '';
+      this.videoUrl = '';
     },
     removeAudio () {
       this.audioList = [];

@@ -28,7 +28,7 @@ module.exports = {
 
     proxy: {
       "/api": {
-        // target: "http://192.168.0.18:8080", //后台本地环境——景钊
+        // target: "http://192.168.0.23:8080", //后台本地环境——景钊
         // target: "http://192.168.2.112:8080", //后台本地环境——苑奥奇
         // target: "http://xindaiguanjia-app-dev.itkyd.com", //测试
         target: "http://xindaiguanjia-app-prod.itkyd.com", //正式域名
