@@ -344,10 +344,10 @@ export default {
       if (this.channel == 'appstore' && this.newAppVersion) {//版本大于等于 1.0.1显示内购
         // this.channel == 'appstore1' && this.appVersionNew ||
         // this.channel == 'appstore' && this.newAppVersion //版本大于等于 1.1.1显示内购
-        this.payList[0].show = true;
-        // this.payList[1].show = true;
+        // this.payList[0].show = true;
+        this.payList[1].show = true;
         // this.payList[2].show = true;
-        this.choosePayWay = 0;
+        this.choosePayWay = 1;
       } else {//支付宝
         this.payList[1].show = true;
         this.choosePayWay = 1;
